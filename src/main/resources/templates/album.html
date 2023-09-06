@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Information</title>
+    <link rel="stylesheet" href="albums.css">
+</head>
+<body>
+<main>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Song Count</th>
+            <th>Length (seconds)</th>
+            <th>Image</th>
+        </tr>
+
+        <tbody th:each="album : ${albums}">
+        <tr>
+            <td th:text="${album.title}">Album Title</td>
+            <td th:text="${album.artist}">Artist</td>
+            <td th:text="${album.songCount}">0</td>
+            <td th:text="${album.length}">0</td>
+            <td>
+                <img th:src="${album.imageUrl}" th:alt="${album.title}" width="100" height="100">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
