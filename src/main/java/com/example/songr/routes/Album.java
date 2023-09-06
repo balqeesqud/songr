@@ -1,9 +1,19 @@
 package com.example.songr.routes;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Album {
-        String title, artist, imageUrl;
-        int songCount;
-        int length;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // How the generated Id will be
+    private Long id;
+    private String title, artist, imageUrl;
+    private int songCount;
+    private int length;
+
 
         public Album() {
         }
@@ -56,7 +66,11 @@ public class Album {
             this.length = length;
         }
 
-        @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
         public String toString() {
             return "Album{" +
                     "title='" + title + '\'' +
