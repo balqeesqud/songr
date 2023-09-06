@@ -41,14 +41,9 @@ main {
     border-radius: 5px;
 }
 
-feature:hover {
+features:hover {
     background-color: #ddd;
     transform: scale(1.05);
 }
 
-footer {
-    text-align: center;
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-}
+
