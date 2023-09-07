@@ -23,7 +23,7 @@ public class AlbumController {
     public RedirectView createAlbum(String title, String artist, String imageUrl, int songCount, int length){
         Album newAlbum=new Album(title,artist,imageUrl,length,songCount);   // this obj will be converted into a record in DB by help of JPA & ORM principle
         albumJpa.save(newAlbum);  // here JPA will take the conversion and save in DB as record
-        return new RedirectView("/albums"); // will redirect to another endpoint i choose
+        return new RedirectView("/allAlbums"); // will redirect to another endpoint i choose
 
     }
 
@@ -35,10 +35,10 @@ public class AlbumController {
         return "album.html";
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete/")
     public RedirectView deleteAlbumById(@PathVariable Long albumId){
         albumJpa.deleteById(albumId);
-        return new RedirectView("/albums");
+        return new RedirectView("/allAlbums");
     }
 
 
