@@ -11,50 +11,68 @@
         <tr>
             <th>Title</th>
             <th>Artist</th>
-            <th>Song Count</th>
-            <th>Length (seconds)</th>
-            <th>Image</th>
+            <th>Length</th>
+            <th>SongCount</th>
+            <th>ImageUrl</th>
         </tr>
 
         <tbody th:each="album : ${albums}">
         <tr>
-            <td th:text="${album.title}">Album Title</td>
-            <td th:text="${album.artist}">Artist</td>
-            <td th:text="${album.songCount}">0</td>
-            <td th:text="${album.length}">0</td>
+            <td th:text="${album.title}"></td>
+            <td th:text="${album.artist}"></td>
+            <td th:text="${album.length}"></td>
+            <td th:text="${album.songCount}"></td>
             <td>
                 <img th:src="${album.imageUrl}" th:alt="${album.title}" width="100" height="100">
             </td>
-<!--           <form th:action="'/delete/' + ${album.id}" th:method="DELETE">-->
-<!--               <input type="hidden" name="_method" value="DELETE">-->
-<!--               <input type="submit" value="Delete Album">-->
-<!--           </form>-->
+
+            <td>
+<!--                //The method in the form for deleting an album is set to "POST" because, in HTML, forms can only submit data-->
+<!--                //using either the "GET" or "POST" methods by default. However, you can simulate other HTTP methods like-->
+<!--                // DELETE or PUT by including a hidden _method input field and setting its value accordingly. This is a-->
+<!--                //common technique used when working with HTML forms to send requests that are not natively supported by HTML forms.-->
+
+                <form th:action="@{'/albums/' + ${album.id}}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+
+<!--            To update title-->
+            <td>
+                <form th:action="@{'/update/' + ${album.id}}" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
+                    <label for="newTitle">New Title:</label>
+                    <input type="text" id="newTitle" name="newTitle" th:value="${album.title}">
+                    <button type="submit">Update Title</button>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>
-    <br>
-    <br>
-    <br>
 
-    <form action="/create-album" method="post">
+
+    <form method="POST" action="/create-album">
         <fieldset>
-            <legend>Create an Album</legend>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required><br>
-            <label for="artist">Artist:</label>
-            <input type="text" id="artist" name="artist" required><br>
-            <label for="songCount">Song Count:</label>
-            <input type="text" id="songCount" name="songCount" required><br>
-            <label for="length">Length (in seconds):</label>
-            <input type="text" id="length" name="length" required><br>
-            <label for="imageUrl">Image URL:</label>
-            <input type="text" id="imageUrl" name="imageUrl" required><br>
-            <input type="submit" value="Create Album">        </fieldset>
+            <legend>Add An Album</legend>
+            <label for="title">Album Name</label>
+            <input type="text" name="title"  id="title" required/>
+
+            <label for="artist">Artist Name</label>
+            <input type="text" name="artist"  id="artist" required/>
+
+            <label for="length">Album Length</label>
+            <input type="text" name="length" id="length" required />
+
+            <label for="imageUrl">Image</label>
+            <input type="text" name="imageUrl" id="imageUrl" required />
+
+            <label for="songCount">Album songCount </label>
+            <input type="text" name="songCount" id="songCount" required/>
+            <input type="submit" value="Create Album" />
+        </fieldset>
     </form>
-
-
-
-
 
 </main>
 </body>
