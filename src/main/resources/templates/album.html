@@ -38,6 +38,13 @@
                     <button type="submit">Update Title</button>
                 </form>
             </td>
+            <td>
+                <form th:action="@{'/albums/' + ${album.id}}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+
 
 
             <td>
@@ -76,6 +83,10 @@
                         <input type="submit" value="Add Song To Album">
                     </fieldset>
                 </form>
+
+
+
+
         </tbody>
 
     </table>
