@@ -14,6 +14,7 @@ hello messages.
 - Thymeleaf (for rendering HTML templates)
 - Gradle (for project management)
 - Spring MVC
+- Database Relationships (@OneToMany and @ManyToOne Relationships) 
 
 ## Methods Used
 
@@ -55,7 +56,29 @@ Here's an overview of how it works:
 These methods enable the basic CRUD (Create, Read, Update, Delete) operations for managing albums in our web
 application.
 
+### Update an album title
 
+To update an album's title, we have implemented a `updateAlbum` method in the `AlbumController` class
+This method is mapped to a `PUT` request with a dynamic path variable for the `albumId` parameter.
+
+### @OneToMany and @ManyToOne Relationships
+
+  -  @OneToMany(mappedBy = "song", cascade = CascadeType.ALL) in the Album class indicates a one-to-many relationship
+     between Album and Song. Each album can have multiple songs, and the song field in the Song entity maps this
+     relationship.
+
+  -  @ManyToOne in the Song class indicates a many-to-one relationship between Song and Album. Each song belongs to
+     single album, and the song field is the mapped side of the relationship. 
+
+### Adding Songs to an Album
+
+To add songs to an existing album, find the album you want to add songs to on the homepage and use the "Add a song to
+this Album" form. Enter the song's title, track number, and length in seconds.
+
+### Viewing Albums and Songs
+
+You can view all albums and their details, including songs, on the homepage. Albums are listed along with their titles,
+artists, lengths, song counts, and image URLs. Clicking on an album will expand it to show its songs.
 
 ## Run application
 
