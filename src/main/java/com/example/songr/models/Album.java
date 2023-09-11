@@ -1,18 +1,24 @@
-package com.example.songr.routes;
+package com.example.songr.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Album {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // How the generated Id will be
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title, artist, imageUrl;
+    private String title, artist;
+
+    @Lob
+    @Column(length = Integer.MAX_VALUE)   // Integer.MAX_VALUE to handle very long strings
+    private String  imageUrl;
     private int songCount;
     private int length;
+
+    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL) // mappedBy(the object of Album class "song") attribute specifies the field in the Song
+    private List<Song> songs;                                     // entity that maps this relationship ( the album field in the Song entity)
+
 
 
         public Album() {
@@ -66,6 +72,17 @@ public class Album {
             this.length = length;
         }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
 
     public Long getId() {
         return id;
